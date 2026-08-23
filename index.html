@@ -4,44 +4,42 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Wonderloop Studios</title>
-<meta name="description" content="Wonderloop Studios — an independent game studio. Site under construction." />
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎮</text></svg>" />
+<meta name="description" content="Wonderloop Studios — an independent game studio building new lands to get lost in." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐇</text></svg>" />
 <style>
   :root {
-    --bg-0: #0b0b14;
-    --bg-1: #12121f;
-    --accent-1: #7c5cff;
-    --accent-2: #22e5c8;
-    --accent-3: #ff5fa2;
-    --text-0: #f5f5fa;
-    --text-1: #a8a8bd;
-    --border: rgba(255, 255, 255, 0.08);
+    --bg-0: #050202;
+    --bg-1: #0d0707;
+    --panel: rgba(255, 255, 255, 0.035);
+    --crimson: #9d001e;
+    --crimson-light: #c93a4a;
+    --crimson-dark: #4a0010;
+    --gold: #c68a3d;
+    --cream: #e4ded0;
+    --text-0: #f0ebe1;
+    --text-1: #b8a99a;
+    --border: rgba(242, 230, 216, 0.1);
+    --header-h: 72px;
   }
 
-  * {
-    box-sizing: border-box;
+  * { box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
   }
 
-  html, body {
-    height: 100%;
-  }
+  html, body { height: 100%; }
 
   body {
     margin: 0;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     font-family: "Segoe UI", Inter, system-ui, -apple-system, sans-serif;
     color: var(--text-0);
-    background: radial-gradient(circle at 20% 20%, #1c1633 0%, transparent 45%),
-                radial-gradient(circle at 80% 30%, #0f2a2a 0%, transparent 50%),
-                radial-gradient(circle at 50% 90%, #2a1330 0%, transparent 55%),
+    background: radial-gradient(circle at 15% 15%, #2a0e0e 0%, transparent 45%),
+                radial-gradient(circle at 85% 25%, #1a0808 0%, transparent 50%),
+                radial-gradient(circle at 50% 95%, #240a0a 0%, transparent 55%),
                 var(--bg-0);
     overflow-x: hidden;
-    padding: 2rem 1.25rem;
-    position: relative;
   }
 
   body::before {
@@ -49,35 +47,177 @@
     position: fixed;
     inset: 0;
     background-image:
-      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      linear-gradient(rgba(242, 230, 216, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(242, 230, 216, 0.025) 1px, transparent 1px);
     background-size: 48px 48px;
     mask-image: radial-gradient(circle at 50% 40%, black, transparent 75%);
     pointer-events: none;
     z-index: 0;
   }
 
-  .glow {
-    position: fixed;
-    border-radius: 50%;
-    filter: blur(120px);
-    opacity: 0.35;
-    z-index: 0;
-    pointer-events: none;
-  }
-  .glow-1 { width: 480px; height: 480px; background: var(--accent-1); top: -120px; left: -120px; }
-  .glow-2 { width: 420px; height: 420px; background: var(--accent-2); bottom: -140px; right: -100px; }
+  a { color: inherit; }
 
-  main {
+  .sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Header / Nav */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    height: var(--header-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.5rem;
+    background: rgba(5, 2, 2, 0.72);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .site-header .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+  }
+
+  .site-header .brand img {
+    height: 40px;
+    width: auto;
+    display: block;
+  }
+
+  .main-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  .main-nav a {
+    display: inline-block;
+    padding: 0.55rem 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: var(--text-1);
+    transition: color 0.18s ease, background 0.18s ease;
+  }
+
+  .main-nav a:hover,
+  .main-nav a:focus-visible,
+  .main-nav a.active {
+    color: var(--cream);
+    background: var(--panel);
+  }
+
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-0);
+    width: 42px;
+    height: 42px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .nav-toggle svg { width: 22px; height: 22px; fill: currentColor; }
+
+  @media (max-width: 720px) {
+    .main-nav {
+      position: fixed;
+      top: var(--header-h);
+      left: 0;
+      right: 0;
+      background: rgba(5, 2, 2, 0.97);
+      border-bottom: 1px solid var(--border);
+      transform: translateY(-110%);
+      transition: transform 0.22s ease;
+    }
+    .main-nav.open { transform: translateY(0); }
+    .main-nav ul {
+      flex-direction: column;
+      padding: 1rem 1.5rem 1.5rem;
+      gap: 0.25rem;
+    }
+    .main-nav a { display: block; padding: 0.85rem 1rem; }
+    .nav-toggle { display: inline-flex; }
+  }
+
+  section {
     position: relative;
     z-index: 1;
-    max-width: 640px;
+    scroll-margin-top: var(--header-h);
+    padding: 5rem 1.25rem;
+  }
+
+  .section-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+  .section-head {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .section-head h2 {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    margin: 0 0 0.6rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: var(--cream);
+  }
+
+  .section-head p {
+    color: var(--text-1);
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  .rule {
+    width: 64px;
+    height: 3px;
+    margin: 0.9rem auto 0;
+    background: linear-gradient(90deg, var(--crimson), var(--gold));
+    border-radius: 999px;
+  }
+
+  /* Home / Hero */
+  #home {
+    min-height: calc(100vh - var(--header-h));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 3rem;
+  }
+
+  .hero {
+    max-width: 920px;
     width: 100%;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
+    gap: 1.75rem;
+  }
+
+  .hero-logo {
+    max-width: min(820px, 92vw);
+    width: 100%;
+    height: auto;
   }
 
   .badge {
@@ -87,9 +227,9 @@
     padding: 0.4rem 0.9rem;
     border-radius: 999px;
     border: 1px solid var(--border);
-    background: rgba(255, 255, 255, 0.04);
+    background: var(--panel);
     backdrop-filter: blur(8px);
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--text-1);
@@ -99,8 +239,8 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: var(--accent-2);
-    box-shadow: 0 0 10px var(--accent-2);
+    background: var(--gold);
+    box-shadow: 0 0 10px var(--gold);
     animation: pulse 1.8s ease-in-out infinite;
   }
 
@@ -109,53 +249,27 @@
     50% { opacity: 0.4; transform: scale(0.75); }
   }
 
-  .logo-wrap {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-  }
-
-  .loop-icon {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    border: 3px solid transparent;
-    border-top-color: var(--accent-1);
-    border-right-color: var(--accent-2);
-    animation: spin 2.4s linear infinite;
-  }
-
-  @keyframes spin {
-    to { transform: rotate(360deg); }
-  }
-
-  h1 {
-    font-size: clamp(2.1rem, 6vw, 3.2rem);
-    margin: 0;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    background: linear-gradient(120deg, var(--accent-2), var(--accent-1) 55%, var(--accent-3));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
   p.lead {
     margin: 0;
     color: var(--text-1);
-    font-size: 1.05rem;
-    line-height: 1.6;
-    max-width: 480px;
+    font-size: 1.1rem;
+    line-height: 1.65;
+    max-width: 500px;
   }
 
-  .construction {
-    font-size: 0.95rem;
-    color: var(--text-1);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: 600;
+  .contact-banner {
+    display: block;
+    width: min(220px, 55vw);
+    height: auto;
+    opacity: 0.92;
+    margin: 0 auto 0.5rem;
+    animation: hop 2.6s ease-in-out infinite;
+  }
+
+  @keyframes hop {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    35% { transform: translateY(-10px) rotate(-2deg); }
+    55% { transform: translateY(0) rotate(0deg); }
   }
 
   .links {
@@ -173,7 +287,7 @@
     padding: 0.75rem 1.25rem;
     border-radius: 12px;
     border: 1px solid var(--border);
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--panel);
     color: var(--text-0);
     text-decoration: none;
     font-weight: 600;
@@ -185,9 +299,9 @@
   .link-card:hover,
   .link-card:focus-visible {
     transform: translateY(-3px);
-    border-color: var(--icon-color, var(--accent-1));
-    background: rgba(255, 255, 255, 0.07);
-    box-shadow: 0 8px 24px -8px var(--icon-color, var(--accent-1));
+    border-color: var(--icon-color, var(--crimson-light));
+    background: rgba(242, 230, 216, 0.07);
+    box-shadow: 0 8px 24px -8px var(--icon-color, var(--crimson));
   }
 
   .link-card svg {
@@ -197,60 +311,408 @@
     flex-shrink: 0;
   }
 
-  footer {
+  @media (max-width: 480px) {
+    .link-card { flex: 1 1 45%; justify-content: center; }
+  }
+
+  /* Games carousel */
+  #games { background: linear-gradient(180deg, transparent, rgba(163, 31, 31, 0.06), transparent); }
+
+  .carousel {
     position: relative;
-    z-index: 1;
-    margin-top: 3rem;
-    color: var(--text-1);
-    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .carousel-viewport {
+    overflow: hidden;
+    flex: 1;
+  }
+
+  .carousel-track {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  .game-card {
+    flex: 0 0 100%;
+    padding: 0 0.5rem;
+  }
+
+  @media (min-width: 720px) {
+    .game-card { flex: 0 0 50%; }
+  }
+  @media (min-width: 1000px) {
+    .game-card { flex: 0 0 33.3333%; }
+  }
+
+  .game-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .game-card figure {
+    margin: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--bg-1);
+    box-shadow: 0 12px 30px -14px rgba(0, 0, 0, 0.7);
+    transition: border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+  }
+
+  .game-link:hover figure,
+  .game-link:focus-visible figure {
+    border-color: var(--crimson-light);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 32px -14px rgba(0, 0, 0, 0.8);
+  }
+
+  .game-card .thumb-wrap {
+    aspect-ratio: 5 / 4;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .game-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .game-card:hover img { transform: scale(1.05); }
+
+  .game-card figcaption {
+    padding: 1rem 1.1rem 1.25rem;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--cream);
     text-align: center;
   }
 
-  @media (max-width: 480px) {
-    .link-card { flex: 1 1 45%; justify-content: center; }
+  .carousel-btn {
+    flex: 0 0 auto;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--panel);
+    color: var(--text-0);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.18s ease, border-color 0.18s ease;
+  }
+
+  .carousel-btn:hover, .carousel-btn:focus-visible {
+    background: rgba(242, 230, 216, 0.08);
+    border-color: var(--crimson-light);
+  }
+
+  .carousel-btn svg { width: 20px; height: 20px; fill: currentColor; }
+
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.75rem;
+  }
+
+  .carousel-dots button {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    border: none;
+    background: var(--border);
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .carousel-dots button.active {
+    background: var(--crimson-light);
+    box-shadow: 0 0 8px var(--crimson-light);
+  }
+
+  /* Who We Are */
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.75rem;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+
+  .team-card {
+    text-align: center;
+  }
+
+  .team-card .photo-wrap {
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--crimson-dark);
+    box-shadow: 0 0 0 6px rgba(163, 31, 31, 0.12);
+    margin: 0 auto 1rem;
+    max-width: 220px;
+  }
+
+  .team-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .team-card figcaption {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--cream);
+  }
+
+  .team-card {
+    margin: 0;
+  }
+
+  /* Contact */
+  .contact-form {
+    max-width: 480px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .contact-form input[type="email"] {
+    flex: 1 1 260px;
+    padding: 0.85rem 1.1rem;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--panel);
+    color: var(--text-0);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.18s ease, background 0.18s ease;
+  }
+
+  .contact-form input[type="email"]::placeholder { color: var(--text-1); }
+
+  .contact-form input[type="email"]:focus {
+    border-color: var(--crimson-light);
+    background: rgba(242, 230, 216, 0.06);
+  }
+
+  .contact-form button {
+    flex: 0 0 auto;
+    padding: 0.85rem 1.6rem;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(120deg, var(--crimson), var(--crimson-light));
+    color: var(--cream);
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+
+  .contact-form button:hover, .contact-form button:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px -10px var(--crimson);
+  }
+
+  .contact-note {
+    text-align: center;
+    color: var(--text-1);
+    font-size: 0.85rem;
+    margin-top: 1rem;
+  }
+
+  footer {
+    position: relative;
+    z-index: 1;
+    padding: 2.5rem 1.25rem 3rem;
+    color: var(--text-1);
+    font-size: 0.8rem;
+    text-align: center;
+    border-top: 1px solid var(--border);
   }
 </style>
 </head>
 <body>
-  <div class="glow glow-1"></div>
-  <div class="glow glow-2"></div>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="Wonderloop Studios home">
+      <img src="assets/logo_wordmark.png" alt="Wonderloop Studios" />
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNav">
+      <svg viewBox="0 0 24 24"><path d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z"/></svg>
+    </button>
+    <nav class="main-nav" id="mainNav">
+      <ul>
+        <li><a href="#home" class="nav-link active">Home</a></li>
+        <li><a href="#games" class="nav-link">Our Games</a></li>
+        <li><a href="#about" class="nav-link">Who We Are</a></li>
+        <li><a href="#contact" class="nav-link">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
 
   <main>
-    <div class="logo-wrap">
-      <span class="loop-icon" aria-hidden="true"></span>
-      <h1>Wonderloop Studios</h1>
-    </div>
+    <section id="home">
+      <div class="hero">
+        <img class="hero-logo" src="assets/logo_wordmark.png" alt="Wonderloop Studios" />
 
-    <div class="badge"><span class="dot"></span>Under Construction</div>
+        <div class="badge"><span class="dot"></span>Under Construction</div>
 
-    <p class="lead">
-      We're an independent game studio crafting new worlds to get lost in.
-      Our site is still being built — in the meantime, follow along and
-      find us where the games already are.
-    </p>
+        <p class="lead">
+          We're an independent game studio building new lands to get lost in.
+          Come follow us down the rabbit hole...
+        </p>
 
-    <div class="links">
-      <a class="link-card" style="--icon-color:#66c0f4" href="https://store.steampowered.com/" target="_blank" rel="noopener noreferrer">
-        <svg viewBox="0 0 24 24"><path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658a3.387 3.387 0 0 1 1.912-.59c.063 0 .125.002.188.005l2.861-4.142V8.91a4.63 4.63 0 0 1 4.62-4.624 4.63 4.63 0 0 1 4.624 4.624 4.63 4.63 0 0 1-4.624 4.62h-.107l-4.076 2.911c0 .052.004.104.004.157a3.407 3.407 0 0 1-3.406 3.406 3.406 3.406 0 0 1-3.34-2.75L.545 15.514C1.988 20.365 6.564 23.912 12 23.912c6.627 0 12-5.373 12-12s-5.373-12-12.021-12ZM7.54 18.21l-1.473-.61a2.556 2.556 0 0 0 1.336 1.24 2.56 2.56 0 0 0 3.34-1.394 2.55 2.55 0 0 0-1.394-3.343 2.56 2.56 0 0 0-1.898-.038l1.523.63a1.889 1.889 0 0 1-1.434 3.498Zm9.043-9.301a3.083 3.083 0 0 1-3.08-3.083 3.084 3.084 0 1 1 6.167.003 3.083 3.083 0 0 1-3.087 3.08Zm0-.964a2.118 2.118 0 1 0 0-4.236 2.118 2.118 0 0 0 0 4.236Z"/></svg>
-        Steam
-      </a>
-      <a class="link-card" style="--icon-color:#fa5c5c" href="https://wonderloopstudios.itch.io/" target="_blank" rel="noopener noreferrer">
-        <svg viewBox="0 0 24 24"><path d="M23.6 6.667c-.126-.665-.462-1.3-1.007-1.951-1.11-1.34-2.617-2.033-4.442-2.033H5.85c-1.826 0-3.333.693-4.443 2.033-.545.65-.881 1.286-1.007 1.95C.161 7.86 0 8.813 0 9.917c0 .923.104 1.827.31 2.702.211.897.55 1.708 1.007 2.42.42.652.906 1.15 1.44 1.474.618.375 1.278.564 1.964.564.796 0 1.6-.245 2.394-.728.63-.383 1.16-.85 1.575-1.39.39.585.9 1.058 1.517 1.408.783.442 1.635.665 2.532.665.897 0 1.749-.223 2.532-.665.617-.35 1.126-.823 1.517-1.408.415.54.945 1.007 1.575 1.39.795.483 1.598.728 2.394.728.686 0 1.346-.19 1.964-.564.534-.324 1.02-.822 1.44-1.474.457-.712.796-1.523 1.007-2.42.206-.875.31-1.78.31-2.702 0-1.104-.161-2.057-.4-3.25zM8.85 15.5c-.7.567-1.42.958-2.13.958-.35 0-.65-.088-.9-.264-.278-.194-.516-.5-.708-.91-.203-.435-.35-.973-.436-1.6a12.6 12.6 0 0 1-.086-1.49c.674.293 1.66.51 2.926.51 1.093 0 2.017-.19 2.72-.437-.05.86-.21 1.634-.478 2.303-.256.638-.591 1.145-.908 1.43zm4.65-1.43c-.267-.669-.427-1.443-.478-2.303.703.246 1.627.437 2.72.437 1.266 0 2.252-.217 2.926-.51.006.5-.02 1.006-.086 1.49-.086.627-.233 1.165-.436 1.6-.192.41-.43.716-.708.91-.25.176-.55.264-.9.264-.71 0-1.43-.391-2.13-.958-.317-.285-.652-.792-.908-1.43zM12 7.25c1.42 0 3.27.98 3.27 2.19 0 .757-.65 1.376-1.646 1.634-.548.142-1.126.176-1.624.176-.498 0-1.076-.034-1.624-.176C9.38 10.816 8.73 10.197 8.73 9.44 8.73 8.23 10.58 7.25 12 7.25z"/></svg>
-        itch.io
-      </a>
-      <a class="link-card" style="--icon-color:#ff0000" href="https://www.youtube.com/@WonderloopStudios" target="_blank" rel="noopener noreferrer">
-        <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-        YouTube
-      </a>
-      <a class="link-card" style="--icon-color:#e1306c" href="https://www.instagram.com/wonderloop.studios" target="_blank" rel="noopener noreferrer">
-        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163C8.741 0 8.332.014 7.052.072 2.695.272.273 2.69.073 7.052.014 8.332 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.332 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.668-.072-4.948-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
-        Instagram
-      </a>
-      <a class="link-card" style="--icon-color:#5865f2" href="https://discord.gg/HGtPHmjtW7" target="_blank" rel="noopener noreferrer">
-        <svg viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.211.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.076.076 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.947 2.418-2.157 2.418z"/></svg>
-        Discord
-      </a>
-    </div>
+        <div class="links">
+          <a class="link-card" style="--icon-color:#66c0f4" href="https://store.steampowered.com/" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24"><path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658a3.387 3.387 0 0 1 1.912-.59c.063 0 .125.002.188.005l2.861-4.142V8.91a4.63 4.63 0 0 1 4.62-4.624 4.63 4.63 0 0 1 4.624 4.624 4.63 4.63 0 0 1-4.624 4.62h-.107l-4.076 2.911c0 .052.004.104.004.157a3.407 3.407 0 0 1-3.406 3.406 3.406 3.406 0 0 1-3.34-2.75L.545 15.514C1.988 20.365 6.564 23.912 12 23.912c6.627 0 12-5.373 12-12s-5.373-12-12.021-12ZM7.54 18.21l-1.473-.61a2.556 2.556 0 0 0 1.336 1.24 2.56 2.56 0 0 0 3.34-1.394 2.55 2.55 0 0 0-1.394-3.343 2.56 2.56 0 0 0-1.898-.038l1.523.63a1.889 1.889 0 0 1-1.434 3.498Zm9.043-9.301a3.083 3.083 0 0 1-3.08-3.083 3.084 3.084 0 1 1 6.167.003 3.083 3.083 0 0 1-3.087 3.08Zm0-.964a2.118 2.118 0 1 0 0-4.236 2.118 2.118 0 0 0 0 4.236Z"/></svg>
+            Steam
+          </a>
+          <a class="link-card" style="--icon-color:#fa5c5c" href="https://wonderloopstudios.itch.io/" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24"><path d="M23.6 6.667c-.126-.665-.462-1.3-1.007-1.951-1.11-1.34-2.617-2.033-4.442-2.033H5.85c-1.826 0-3.333.693-4.443 2.033-.545.65-.881 1.286-1.007 1.95C.161 7.86 0 8.813 0 9.917c0 .923.104 1.827.31 2.702.211.897.55 1.708 1.007 2.42.42.652.906 1.15 1.44 1.474.618.375 1.278.564 1.964.564.796 0 1.6-.245 2.394-.728.63-.383 1.16-.85 1.575-1.39.39.585.9 1.058 1.517 1.408.783.442 1.635.665 2.532.665.897 0 1.749-.223 2.532-.665.617-.35 1.126-.823 1.517-1.408.415.54.945 1.007 1.575 1.39.795.483 1.598.728 2.394.728.686 0 1.346-.19 1.964-.564.534-.324 1.02-.822 1.44-1.474.457-.712.796-1.523 1.007-2.42.206-.875.31-1.78.31-2.702 0-1.104-.161-2.057-.4-3.25zM8.85 15.5c-.7.567-1.42.958-2.13.958-.35 0-.65-.088-.9-.264-.278-.194-.516-.5-.708-.91-.203-.435-.35-.973-.436-1.6a12.6 12.6 0 0 1-.086-1.49c.674.293 1.66.51 2.926.51 1.093 0 2.017-.19 2.72-.437-.05.86-.21 1.634-.478 2.303-.256.638-.591 1.145-.908 1.43zm4.65-1.43c-.267-.669-.427-1.443-.478-2.303.703.246 1.627.437 2.72.437 1.266 0 2.252-.217 2.926-.51.006.5-.02 1.006-.086 1.49-.086.627-.233 1.165-.436 1.6-.192.41-.43.716-.708.91-.25.176-.55.264-.9.264-.71 0-1.43-.391-2.13-.958-.317-.285-.652-.792-.908-1.43zM12 7.25c1.42 0 3.27.98 3.27 2.19 0 .757-.65 1.376-1.646 1.634-.548.142-1.126.176-1.624.176-.498 0-1.076-.034-1.624-.176C9.38 10.816 8.73 10.197 8.73 9.44 8.73 8.23 10.58 7.25 12 7.25z"/></svg>
+            itch.io
+          </a>
+          <a class="link-card" style="--icon-color:#ff0000" href="https://www.youtube.com/@WonderloopStudios" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            YouTube
+          </a>
+          <a class="link-card" style="--icon-color:#e1306c" href="https://www.instagram.com/wonderloop.studios" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163C8.741 0 8.332.014 7.052.072 2.695.272.273 2.69.073 7.052.014 8.332 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.332 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.668-.072-4.948-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+            Instagram
+          </a>
+          <a class="link-card" style="--icon-color:#5865f2" href="https://discord.gg/HGtPHmjtW7" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.211.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.3 12.3 0 0 1-1.873.892.076.076 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.947 2.418-2.157 2.418z"/></svg>
+            Discord
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="games">
+      <div class="section-inner">
+        <div class="section-head">
+          <h2>Our Games</h2>
+          <div class="rule"></div>
+          <p>A look at what we're building.</p>
+        </div>
+
+        <div class="carousel">
+          <button class="carousel-btn" id="carouselPrev" aria-label="Previous game">
+            <svg viewBox="0 0 24 24"><path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+          </button>
+
+          <div class="carousel-viewport">
+            <ul class="carousel-track" id="carouselTrack">
+              <li class="game-card">
+                <a class="game-link" href="https://phanto86.itch.io/pawlitics" target="_blank" rel="noopener noreferrer">
+                  <figure>
+                    <div class="thumb-wrap">
+                      <img src="assets/thumbnails/pawlitics.png" alt="Pawlitics thumbnail" loading="lazy" />
+                    </div>
+                    <figcaption>Pawlitics</figcaption>
+                  </figure>
+                </a>
+              </li>
+              <li class="game-card">
+                <a class="game-link" href="https://manny6902.itch.io/wonderloop" target="_blank" rel="noopener noreferrer">
+                  <figure>
+                    <div class="thumb-wrap">
+                      <img src="assets/thumbnails/wonderloop_game.png" alt="Wonderloop thumbnail" loading="lazy" />
+                    </div>
+                    <figcaption>Wonderloop</figcaption>
+                  </figure>
+                </a>
+              </li>
+              <li class="game-card">
+                <a class="game-link" href="https://phanto86.itch.io/slick-driver" target="_blank" rel="noopener noreferrer">
+                  <figure>
+                    <div class="thumb-wrap">
+                      <img src="assets/thumbnails/slick_driver.png" alt="Slick Driver thumbnail" loading="lazy" />
+                    </div>
+                    <figcaption>Slick Driver</figcaption>
+                  </figure>
+                </a>
+              </li>
+              <li class="game-card">
+                <a class="game-link" href="https://wonderloopstudios.itch.io/charging-bull-run" target="_blank" rel="noopener noreferrer">
+                  <figure>
+                    <div class="thumb-wrap">
+                      <img src="assets/thumbnails/charging_bull_icon.png" alt="Charging Bull thumbnail" loading="lazy" />
+                    </div>
+                    <figcaption>Charging Bull</figcaption>
+                  </figure>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <button class="carousel-btn" id="carouselNext" aria-label="Next game">
+            <svg viewBox="0 0 24 24"><path d="m8.59 16.59 1.41 1.41 6-6-6-6-1.41 1.41L13.17 12z"/></svg>
+          </button>
+        </div>
+
+        <div class="carousel-dots" id="carouselDots"></div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="section-inner">
+        <div class="section-head">
+          <h2>Who We Are</h2>
+          <div class="rule"></div>
+          <p>The team behind Wonderloop Studios.</p>
+        </div>
+
+        <div class="team-grid">
+          <figure class="team-card">
+            <div class="photo-wrap">
+              <img src="assets/about-us/Manny.jpg" alt="Manny" loading="lazy" />
+            </div>
+            <figcaption>Manny</figcaption>
+          </figure>
+          <figure class="team-card">
+            <div class="photo-wrap">
+              <img src="assets/about-us/Imran.jpg" alt="Imran" loading="lazy" />
+            </div>
+            <figcaption>Imran</figcaption>
+          </figure>
+          <figure class="team-card">
+            <div class="photo-wrap">
+              <img src="assets/about-us/Mihir.jpg" alt="Mihir" loading="lazy" />
+            </div>
+            <figcaption>Mihir</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="section-inner">
+        <img class="contact-banner" src="assets/banner.png" alt="Rabbit leaping down the rabbit hole" />
+
+        <div class="section-head">
+          <h2>Contact Us</h2>
+          <div class="rule"></div>
+          <p>Drop your email and we'll open a message to you.</p>
+        </div>
+
+        <form class="contact-form" id="contactForm">
+          <label for="contactEmail" class="sr-only">Your email address</label>
+          <input type="email" id="contactEmail" name="email" placeholder="you@example.com" required />
+          <button type="submit">Send</button>
+        </form>
+        <p class="contact-note">This opens your email client to reach us at contact@wonderloop.studio.</p>
+      </div>
+    </section>
   </main>
 
   <footer>
@@ -259,6 +721,138 @@
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Mobile nav toggle
+    const navToggle = document.getElementById("navToggle");
+    const mainNav = document.getElementById("mainNav");
+    navToggle.addEventListener("click", () => {
+      const isOpen = mainNav.classList.toggle("open");
+      navToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+    mainNav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        mainNav.classList.remove("open");
+        navToggle.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    // Active nav link on scroll
+    const navLinks = Array.from(document.querySelectorAll(".nav-link"));
+    const sections = navLinks
+      .map((link) => document.querySelector(link.getAttribute("href")))
+      .filter(Boolean);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = "#" + entry.target.id;
+            navLinks.forEach((link) =>
+              link.classList.toggle("active", link.getAttribute("href") === id)
+            );
+          }
+        });
+      },
+      { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
+    );
+    sections.forEach((section) => observer.observe(section));
+
+    // Games carousel
+    const track = document.getElementById("carouselTrack");
+    const cards = Array.from(track.children);
+    const dotsWrap = document.getElementById("carouselDots");
+    const prevBtn = document.getElementById("carouselPrev");
+    const nextBtn = document.getElementById("carouselNext");
+
+    let perView = 1;
+    let index = 0;
+    let autoplayTimer;
+
+    function getPerView() {
+      const width = window.innerWidth;
+      if (width >= 1000) return 3;
+      if (width >= 720) return 2;
+      return 1;
+    }
+
+    function maxIndex() {
+      return Math.max(0, cards.length - perView);
+    }
+
+    function renderDots() {
+      dotsWrap.innerHTML = "";
+      const dotCount = maxIndex() + 1;
+      for (let i = 0; i < dotCount; i++) {
+        const dot = document.createElement("button");
+        dot.setAttribute("aria-label", "Go to slide " + (i + 1));
+        dot.addEventListener("click", () => goTo(i));
+        dotsWrap.appendChild(dot);
+      }
+      updateDots();
+    }
+
+    function updateDots() {
+      Array.from(dotsWrap.children).forEach((dot, i) => {
+        dot.classList.toggle("active", i === index);
+      });
+    }
+
+    function update() {
+      const cardWidth = cards[0].getBoundingClientRect().width;
+      track.style.transform = `translateX(-${index * cardWidth}px)`;
+      updateDots();
+    }
+
+    function goTo(i) {
+      index = Math.min(Math.max(i, 0), maxIndex());
+      update();
+    }
+
+    function next() {
+      goTo(index >= maxIndex() ? 0 : index + 1);
+    }
+
+    function prev() {
+      goTo(index <= 0 ? maxIndex() : index - 1);
+    }
+
+    function startAutoplay() {
+      stopAutoplay();
+      autoplayTimer = setInterval(next, 4500);
+    }
+
+    function stopAutoplay() {
+      if (autoplayTimer) clearInterval(autoplayTimer);
+    }
+
+    function handleResize() {
+      const newPerView = getPerView();
+      if (newPerView !== perView) {
+        perView = newPerView;
+        renderDots();
+      }
+      goTo(Math.min(index, maxIndex()));
+    }
+
+    prevBtn.addEventListener("click", () => { prev(); startAutoplay(); });
+    nextBtn.addEventListener("click", () => { next(); startAutoplay(); });
+    track.parentElement.addEventListener("mouseenter", stopAutoplay);
+    track.parentElement.addEventListener("mouseleave", startAutoplay);
+    window.addEventListener("resize", handleResize);
+
+    perView = getPerView();
+    renderDots();
+    startAutoplay();
+
+    // Contact form -> mailto
+    const contactForm = document.getElementById("contactForm");
+    contactForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = document.getElementById("contactEmail").value.trim();
+      const subject = encodeURIComponent("Hello from " + email);
+      const body = encodeURIComponent("You can reach me at: " + email);
+      window.location.href = `mailto:contact@wonderloop.studio?subject=${subject}&body=${body}`;
+    });
   </script>
 </body>
 </html>

@@ -205,7 +205,7 @@
   }
 
   .hero {
-    max-width: 680px;
+    max-width: 920px;
     width: 100%;
     text-align: center;
     display: flex;
@@ -215,7 +215,7 @@
   }
 
   .hero-logo {
-    max-width: min(420px, 90vw);
+    max-width: min(820px, 92vw);
     width: 100%;
     height: auto;
   }
@@ -257,10 +257,12 @@
     max-width: 500px;
   }
 
-  .hero-banner {
-    width: min(280px, 60vw);
+  .contact-banner {
+    display: block;
+    width: min(220px, 55vw);
     height: auto;
     opacity: 0.92;
+    margin: 0 auto 0.5rem;
     animation: hop 2.6s ease-in-out infinite;
   }
 
@@ -543,7 +545,7 @@
 <body>
   <header class="site-header">
     <a class="brand" href="#home" aria-label="Wonderloop Studios home">
-      <img src="assets/logo.png" alt="Wonderloop Studios" />
+      <img src="assets/logo_wordmark.png" alt="Wonderloop Studios" />
     </a>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNav">
       <svg viewBox="0 0 24 24"><path d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z"/></svg>
@@ -561,7 +563,7 @@
   <main>
     <section id="home">
       <div class="hero">
-        <img class="hero-logo" src="assets/logo.png" alt="Wonderloop Studios" />
+        <img class="hero-logo" src="assets/logo_wordmark.png" alt="Wonderloop Studios" />
 
         <div class="badge"><span class="dot"></span>Under Construction</div>
 
@@ -569,8 +571,6 @@
           We're an independent game studio building new lands to get lost in.
           Come follow us down the rabbit hole...
         </p>
-
-        <img class="hero-banner" src="assets/banner.png" alt="Rabbit leaping down the rabbit hole" />
 
         <div class="links">
           <a class="link-card" style="--icon-color:#66c0f4" href="https://store.steampowered.com/" target="_blank" rel="noopener noreferrer">
@@ -697,6 +697,8 @@
 
     <section id="contact">
       <div class="section-inner">
+        <img class="contact-banner" src="assets/banner.png" alt="Rabbit leaping down the rabbit hole" />
+
         <div class="section-head">
           <h2>Contact Us</h2>
           <div class="rule"></div>

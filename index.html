@@ -11,13 +11,13 @@
     --bg-0: #050202;
     --bg-1: #0d0707;
     --panel: rgba(255, 255, 255, 0.035);
-    --crimson: #a31f1f;
-    --crimson-light: #d4453f;
-    --crimson-dark: #4a0e0e;
-    --gold: #c9a227;
-    --cream: #f2e6d8;
-    --text-0: #f5ece2;
-    --text-1: #bfa89a;
+    --crimson: #9d001e;
+    --crimson-light: #c93a4a;
+    --crimson-dark: #4a0010;
+    --gold: #c68a3d;
+    --cream: #e4ded0;
+    --text-0: #f0ebe1;
+    --text-1: #b8a99a;
     --border: rgba(242, 230, 216, 0.1);
     --header-h: 72px;
   }
@@ -345,6 +345,12 @@
     .game-card { flex: 0 0 33.3333%; }
   }
 
+  .game-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
   .game-card figure {
     margin: 0;
     border-radius: 16px;
@@ -352,6 +358,14 @@
     border: 1px solid var(--border);
     background: var(--bg-1);
     box-shadow: 0 12px 30px -14px rgba(0, 0, 0, 0.7);
+    transition: border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+  }
+
+  .game-link:hover figure,
+  .game-link:focus-visible figure {
+    border-color: var(--crimson-light);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 32px -14px rgba(0, 0, 0, 0.8);
   }
 
   .game-card .thumb-wrap {
@@ -599,36 +613,44 @@
           <div class="carousel-viewport">
             <ul class="carousel-track" id="carouselTrack">
               <li class="game-card">
-                <figure>
-                  <div class="thumb-wrap">
-                    <img src="assets/thumbnails/pawlitics.png" alt="Pawlitics thumbnail" loading="lazy" />
-                  </div>
-                  <figcaption>Pawlitics</figcaption>
-                </figure>
+                <a class="game-link" href="https://phanto86.itch.io/pawlitics" target="_blank" rel="noopener noreferrer">
+                  <figure>
+                    <div class="thumb-wrap">
+                      <img src="assets/thumbnails/pawlitics.png" alt="Pawlitics thumbnail" loading="lazy" />
+                    </div>
+                    <figcaption>Pawlitics</figcaption>
+                  </figure>
+                </a>
               </li>
               <li class="game-card">
-                <figure>
-                  <div class="thumb-wrap">
-                    <img src="assets/thumbnails/wonderloop_game.png" alt="Wonderloop thumbnail" loading="lazy" />
-                  </div>
-                  <figcaption>Wonderloop</figcaption>
-                </figure>
+                <a class="game-link" href="https://manny6902.itch.io/wonderloop" target="_blank" rel="noopener noreferrer">
+                  <figure>
+                    <div class="thumb-wrap">
+                      <img src="assets/thumbnails/wonderloop_game.png" alt="Wonderloop thumbnail" loading="lazy" />
+                    </div>
+                    <figcaption>Wonderloop</figcaption>
+                  </figure>
+                </a>
               </li>
               <li class="game-card">
-                <figure>
-                  <div class="thumb-wrap">
-                    <img src="assets/thumbnails/slick_driver.png" alt="Slick Driver thumbnail" loading="lazy" />
-                  </div>
-                  <figcaption>Slick Driver</figcaption>
-                </figure>
+                <a class="game-link" href="https://phanto86.itch.io/slick-driver" target="_blank" rel="noopener noreferrer">
+                  <figure>
+                    <div class="thumb-wrap">
+                      <img src="assets/thumbnails/slick_driver.png" alt="Slick Driver thumbnail" loading="lazy" />
+                    </div>
+                    <figcaption>Slick Driver</figcaption>
+                  </figure>
+                </a>
               </li>
               <li class="game-card">
-                <figure>
-                  <div class="thumb-wrap">
-                    <img src="assets/thumbnails/charging_bull_icon.png" alt="Charging Bull thumbnail" loading="lazy" />
-                  </div>
-                  <figcaption>Charging Bull</figcaption>
-                </figure>
+                <a class="game-link" href="https://wonderloopstudios.itch.io/charging-bull-run" target="_blank" rel="noopener noreferrer">
+                  <figure>
+                    <div class="thumb-wrap">
+                      <img src="assets/thumbnails/charging_bull_icon.png" alt="Charging Bull thumbnail" loading="lazy" />
+                    </div>
+                    <figcaption>Charging Bull</figcaption>
+                  </figure>
+                </a>
               </li>
             </ul>
           </div>

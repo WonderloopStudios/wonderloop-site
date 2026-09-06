@@ -540,9 +540,67 @@
     text-align: center;
     border-top: 1px solid var(--border);
   }
+
+  /* Rabbit hole tunnel background */
+  .rabbit-hole {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .rabbit-hole .ring,
+  .rabbit-hole .hole-core {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .ring-1 { width: 38vmin; height: 38vmin; border: 2px solid rgba(198, 138, 61, 0.35); box-shadow: 0 0 40px rgba(198, 138, 61, 0.15); animation: spin-slow 40s linear infinite; }
+  .ring-2 { width: 58vmin; height: 58vmin; border: 2px solid rgba(157, 0, 30, 0.3); box-shadow: 0 0 50px rgba(157, 0, 30, 0.12); animation: spin-slow 55s linear infinite reverse; }
+  .ring-3 { width: 80vmin; height: 80vmin; border: 1.5px solid rgba(198, 138, 61, 0.22); animation: spin-slow 70s linear infinite; }
+  .ring-4 { width: 105vmin; height: 105vmin; border: 1.5px solid rgba(157, 0, 30, 0.18); animation: spin-slow 90s linear infinite reverse; }
+  .ring-5 { width: 135vmin; height: 135vmin; border: 1px solid rgba(198, 138, 61, 0.12); animation: spin-slow 110s linear infinite; }
+
+  .hole-core {
+    width: 14vmin;
+    height: 14vmin;
+    background: radial-gradient(circle, #000 0%, rgba(0, 0, 0, 0.85) 55%, transparent 100%);
+    filter: blur(2px);
+  }
+
+  @keyframes spin-slow {
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  .fall-vignette {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at 50% 40%, transparent 30%, #000 120%);
+    opacity: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rabbit-hole .ring { animation: none !important; }
+  }
 </style>
 </head>
 <body>
+  <div class="rabbit-hole" aria-hidden="true">
+    <div class="ring ring-5"></div>
+    <div class="ring ring-4"></div>
+    <div class="ring ring-3"></div>
+    <div class="ring ring-2"></div>
+    <div class="ring ring-1"></div>
+    <div class="hole-core"></div>
+  </div>
+  <div class="fall-vignette" aria-hidden="true"></div>
+
   <header class="site-header">
     <a class="brand" href="#home" aria-label="Wonderloop Studios home">
       <img src="assets/logo_wordmark.png" alt="Wonderloop Studios" />
@@ -563,7 +621,7 @@
   <main>
     <section id="home">
       <div class="hero">
-        <img class="hero-logo" src="assets/logo_wordmark.png" alt="Wonderloop Studios" />
+        <img class="hero-logo" data-parallax="-0.25" src="assets/logo_wordmark.png" alt="Wonderloop Studios" />
 
         <div class="badge"><span class="dot"></span>Under Construction</div>
 
@@ -599,13 +657,13 @@
 
     <section id="games">
       <div class="section-inner">
-        <div class="section-head">
+        <div class="section-head reveal">
           <h2>Our Games</h2>
           <div class="rule"></div>
           <p>A look at what we're building.</p>
         </div>
 
-        <div class="carousel">
+        <div class="carousel reveal">
           <button class="carousel-btn" id="carouselPrev" aria-label="Previous game">
             <svg viewBox="0 0 24 24"><path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
           </button>
@@ -666,26 +724,26 @@
 
     <section id="about">
       <div class="section-inner">
-        <div class="section-head">
+        <div class="section-head reveal">
           <h2>Who We Are</h2>
           <div class="rule"></div>
           <p>The team behind Wonderloop Studios.</p>
         </div>
 
         <div class="team-grid">
-          <figure class="team-card">
+          <figure class="team-card reveal">
             <div class="photo-wrap">
               <img src="assets/about-us/Manny.jpg" alt="Manny" loading="lazy" />
             </div>
             <figcaption>Manny</figcaption>
           </figure>
-          <figure class="team-card">
+          <figure class="team-card reveal">
             <div class="photo-wrap">
               <img src="assets/about-us/Imran.jpg" alt="Imran" loading="lazy" />
             </div>
             <figcaption>Imran</figcaption>
           </figure>
-          <figure class="team-card">
+          <figure class="team-card reveal">
             <div class="photo-wrap">
               <img src="assets/about-us/Mihir.jpg" alt="Mihir" loading="lazy" />
             </div>
@@ -697,15 +755,15 @@
 
     <section id="contact">
       <div class="section-inner">
-        <img class="contact-banner" src="assets/banner.png" alt="Rabbit leaping down the rabbit hole" />
+        <img class="contact-banner" data-parallax="0.35" src="assets/banner.png" alt="Rabbit leaping down the rabbit hole" />
 
-        <div class="section-head">
+        <div class="section-head reveal">
           <h2>Contact Us</h2>
           <div class="rule"></div>
           <p>Drop your email and we'll open a message to you.</p>
         </div>
 
-        <form class="contact-form" id="contactForm">
+        <form class="contact-form reveal" id="contactForm">
           <label for="contactEmail" class="sr-only">Your email address</label>
           <input type="email" id="contactEmail" name="email" placeholder="you@example.com" required />
           <button type="submit">Send</button>
@@ -719,6 +777,8 @@
     &copy; <span id="year"></span> Wonderloop Studios. All rights reserved.
   </footer>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
@@ -853,6 +913,102 @@
       const body = encodeURIComponent("You can reach me at: " + email);
       window.location.href = `mailto:contact@wonderloop.studio?subject=${subject}&body=${body}`;
     });
+
+    // Rabbit-hole scroll animations (falling-down-the-hole effect)
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (!prefersReducedMotion && window.gsap && window.ScrollTrigger) {
+      gsap.registerPlugin(ScrollTrigger);
+      ScrollTrigger.config({ ignoreMobileResize: true });
+
+      const mm = gsap.matchMedia();
+
+      mm.add(
+        {
+          isMobile: "(max-width: 720px)",
+          isDesktop: "(min-width: 721px)",
+        },
+        (context) => {
+          const { isMobile } = context.conditions;
+
+          // Continuous tunnel: the ring cluster scales + rotates as you fall
+          // through the whole page, and a vignette darkens toward the bottom.
+          gsap.to(".rabbit-hole", {
+            scale: isMobile ? 2.1 : 3.4,
+            rotation: isMobile ? 70 : 140,
+            ease: "none",
+            scrollTrigger: {
+              trigger: document.body,
+              start: "top top",
+              end: "bottom bottom",
+              scrub: 0.6,
+            },
+          });
+
+          gsap.to(".fall-vignette", {
+            opacity: 0.6,
+            ease: "none",
+            scrollTrigger: {
+              trigger: document.body,
+              start: "top top",
+              end: "bottom bottom",
+              scrub: 0.6,
+            },
+          });
+
+          // Parallax: elements drift at a different rate than the scroll
+          // itself, as if rushing past on the way down.
+          gsap.utils.toArray("[data-parallax]").forEach((el) => {
+            const speed = parseFloat(el.dataset.parallax) || 0.2;
+            const distance = (isMobile ? 60 : 120) * speed;
+            gsap.to(el, {
+              y: distance,
+              ease: "none",
+              scrollTrigger: {
+                trigger: el,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true,
+              },
+            });
+          });
+
+          return () => {
+            // matchMedia handles cleanup of the tweens/triggers created above
+            // automatically when the breakpoint context changes.
+          };
+        }
+      );
+
+      // Section reveals: content tumbles into place as it falls into view.
+      const revealTargets = gsap.utils.toArray(".reveal");
+      revealTargets.forEach((el, i) => {
+        gsap.set(el, {
+          opacity: 0,
+          y: -50,
+          scale: 0.94,
+          rotate: i % 2 === 0 ? -2.5 : 2.5,
+        });
+      });
+
+      ScrollTrigger.batch(".reveal", {
+        start: "top 88%",
+        once: true,
+        onEnter: (batch) =>
+          gsap.to(batch, {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            rotate: 0,
+            duration: 1,
+            ease: "power3.out",
+            stagger: 0.12,
+            overwrite: true,
+          }),
+      });
+
+      window.addEventListener("load", () => ScrollTrigger.refresh());
+    }
   </script>
 </body>
 </html>

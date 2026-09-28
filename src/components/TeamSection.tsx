@@ -1,7 +1,7 @@
 type Member = { name: string; photo: string };
 
 const TEAM: Member[] = [
-  { name: "Manny", photo: "/assets/about-us/Manny.jpg" },
+  { name: "Manny", photo: "/assets/about-us/Manny.png" },
   { name: "Imran", photo: "/assets/about-us/Imran.jpg" },
   { name: "Mihir", photo: "/assets/about-us/Mihir.jpg" },
 ];
